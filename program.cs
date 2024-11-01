@@ -33,13 +33,38 @@ namespace Graph_dsa
             }
             adjaencylist[fromnode!].Add(tonode!);
         }
+         public void print()
+        {
+            ICollection<Node> nodes = adjaencylist.Keys;
+            foreach (var source in adjaencylist.Keys)
+            {
+                var targets = adjaencylist[source];
+                if (targets != null)
+                {
+                    foreach (var target in targets)
+                    {
+                        Console.WriteLine(source + " is connected to " + target);
+                    }
+                }
+            }
+        }
     }
 
     public class Progarm
     {
         static void Main()
         {
-
+             graph.add_node("A");
+            graph.add_node("B");
+            graph.add_node("C");
+            graph.add_node("D");
+            graph.add_edge("A", "B");
+            graph.add_edge("A", "C");
+            graph.add_edge("A", "D");
+            graph.add_edge("B", "D");
+            graph.add_edge("C", "A");
+            graph.add_edge("D", "B");
+            graph.print();
         }
     }
 }
