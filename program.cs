@@ -48,6 +48,17 @@ namespace Graph_dsa
                 }
             }
         }
+          public void remove(string data)
+        {
+            var node = _nodes[data];
+            if (node == null) return;
+            foreach (var source in adjaencylist.Keys)
+            {
+                adjaencylist[(source)].Remove(node);
+            }
+            adjaencylist.Remove(node);
+            _nodes.Remove(data);
+        }
     }
 
     public class Progarm
