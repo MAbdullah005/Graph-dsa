@@ -69,6 +69,76 @@ namespace Graph_dsa
             }
             adjaencylist[fromnode!].Remove(tonode!);
         }
+         public void Depth_fist(string data)
+        {
+            if (data == null)
+            {
+                return;
+            }
+            if (_nodes.ContainsKey(data))
+            {
+                var node = _nodes[data];
+                if (node == null) return;
+                Depth_fist(adjaencylist, node, new HashSet<Node>());
+            }
+
+        }
+        private void Depth_fist(Dictionary<Node, List<Node>> adjecent, Node node, HashSet<Node> set)
+        {
+            if (!set.Contains(node))
+            {
+                Console.WriteLine(node.lable);
+            }
+            foreach (var source in adjecent[node])
+            {
+                Depth_fist(adjecent, source, set);
+                set.Add(source);
+            }
+        }
+        public void depthfist_iteration(string data)
+        {
+            if (_nodes.ContainsKey(data))
+            {
+                Console.WriteLine("[" + data + "]");
+                var node = _nodes[data];
+                foreach (var source in adjaencylist[node])
+                {
+                    Console.WriteLine(source);
+                    if (source != null)
+                    {
+                        foreach (var i in adjaencylist[source])
+                        {
+                            Console.WriteLine(i);
+                        }
+                    }
+                }
+            }
+        }
+        public void depthfist_iteration_mosh(string data)
+        {
+            Stack<Node> stack = new Stack<Node>(); 
+            HashSet<Node> set = new HashSet<Node>();
+            if (_nodes.ContainsKey(data))
+            {
+                var node= _nodes[data];
+                stack.Push(node);
+                while(stack.Count > 0)
+                {
+                    var current=stack.Pop();
+                    if (set.Contains(current))
+                        continue;
+                    Console.WriteLine(current);
+                    set.Add(current);
+                    foreach(var nigbour in adjaencylist[current])
+                    {
+                        if(!set.Contains(nigbour))
+                        {
+                            stack.Push(nigbour);
+                        }
+                    }
+                }
+            }
+        }
     }
 
     public class Progarm
