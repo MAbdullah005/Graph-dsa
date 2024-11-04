@@ -59,6 +59,16 @@ namespace Graph_dsa
             adjaencylist.Remove(node);
             _nodes.Remove(data);
         }
+        public void remove_edge(string from, string to)
+        {
+            var fromnode = _nodes[from];
+            var tonode = _nodes[to];
+            if (fromnode == null || tonode == null)
+            {
+                return;
+            }
+            adjaencylist[fromnode!].Remove(tonode!);
+        }
     }
 
     public class Progarm
