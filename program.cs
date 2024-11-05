@@ -139,6 +139,31 @@ namespace Graph_dsa
                 }
             }
         }
+         public void breast_fist(string data)
+        {
+            Queue<Node> queue = new Queue<Node>();
+            HashSet<Node> set = new HashSet<Node>();
+            if (_nodes.ContainsKey(data))
+            {
+                var current = _nodes[data];
+                queue.Enqueue(current);
+                while (queue.Count > 0)
+                {
+                    var node= queue.Dequeue();
+                    if(set.Contains(node))
+                        continue;
+                    Console.WriteLine(node);
+                    set.Add((Node)node);
+                    foreach(var nigbour in adjaencylist[node])
+                    {
+                        if(!set.Contains((Node)nigbour))
+                        {
+                            queue.Enqueue(nigbour);
+                        }
+                    }
+                }
+            }
+        }
     }
 
     public class Progarm
