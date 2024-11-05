@@ -164,6 +164,31 @@ namespace Graph_dsa
                 }
             }
         }
+         public List<string> topological_order()
+        {
+           Stack<Node> stack = new Stack<Node>();
+            HashSet<Node> set = new HashSet<Node>();
+            foreach(var node in _nodes.Values)
+            {
+                topological_order(node, set, stack);
+            }
+            List<string> list = new List<string>();
+            while(stack.Count > 0)
+            {
+                list.Add(stack.Pop().lable);
+            }
+            return list;
+        }
+        private void topological_order(Node node,HashSet<Node> set,Stack<Node> stack)
+        {
+            if(set.Contains(node))return;
+            set.Add(node);
+            foreach(var child in adjaencylist[node])
+            {
+                topological_order(child, set, stack);
+            }
+            stack.Push(node);
+        }
     }
 
     public class Progarm
