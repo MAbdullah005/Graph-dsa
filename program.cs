@@ -189,6 +189,47 @@ namespace Graph_dsa
             }
             stack.Push(node);
         }
+         public bool cycleDetection()
+        {
+            HashSet<Node> all = new HashSet<Node>();
+            HashSet<Node> visited = new HashSet<Node>();
+            HashSet<Node> visiting = new HashSet<Node>();
+            foreach(var node in _nodes.Values)
+            {
+                all.Add(node);
+            }
+
+            while(all.Count > 0)
+            {
+                var current = all.ToArray()[0];
+                if (cycleDetection(current, all, visiting, visited))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+        private bool cycleDetection(Node node,HashSet<Node> all,HashSet<Node> visiting,HashSet<Node> visited)
+        {
+            all.Remove(node);
+            visiting.Add(node);
+            foreach(var nigbur in adjaencylist[node])
+            {
+                if(visited.Contains(nigbur))
+                    continue; 
+                if(visiting.Contains(nigbur))
+                {
+                    return true;
+                }
+                if (cycleDetection(nigbur, all, visiting, visited))
+                {
+                    return true;
+                }
+            }
+            visiting.Remove(node);
+            visited.Add(node);
+            return false;
+        }
     }
 
     public class Progarm
